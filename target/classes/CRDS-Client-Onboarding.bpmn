@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_07u95g6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="Client-onboarding" name="CRDS-Client-onboarding" isExecutable="true" camunda:historyTimeToLive="P30D">
+    <bpmn:startEvent id="StartEvent_1" name="Initiating CRDS client onboarding">
+      <bpmn:extensionElements />
+      <bpmn:outgoing>Flow_0mav4t6</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_0v2vqpa" name="First Level Review">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1kyaxph</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pmzppu</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0h1p266" name="Second Level Review">
+      <bpmn:incoming>Flow_0pmzppu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jrw6yn</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0mav4t6" sourceRef="StartEvent_1" targetRef="Activity_0y9u4xh" />
+    <bpmn:userTask id="Activity_0y9u4xh" name="Data Submission">
+      <bpmn:incoming>Flow_0mav4t6</bpmn:incoming>
+      <bpmn:outgoing>Flow_1kyaxph</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1kyaxph" sourceRef="Activity_0y9u4xh" targetRef="Activity_0v2vqpa" />
+    <bpmn:endEvent id="Event_10d9y6w" name="Client Onboarding End">
+      <bpmn:incoming>Flow_1ha0rqe</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1goqhbe" name="Final data Persists" camunda:delegateExpression="#{finalDataSubmission}">
+      <bpmn:incoming>Flow_0jrw6yn</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ha0rqe</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1ha0rqe" sourceRef="Activity_1goqhbe" targetRef="Event_10d9y6w" />
+    <bpmn:sequenceFlow id="Flow_0pmzppu" sourceRef="Activity_0v2vqpa" targetRef="Activity_0h1p266" />
+    <bpmn:sequenceFlow id="Flow_0jrw6yn" sourceRef="Activity_0h1p266" targetRef="Activity_1goqhbe" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Client-onboarding">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="149" y="145" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y9u4xh_di" bpmnElement="Activity_0y9u4xh">
+        <dc:Bounds x="320" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0v2vqpa_di" bpmnElement="Activity_0v2vqpa">
+        <dc:Bounds x="490" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h1p266_di" bpmnElement="Activity_0h1p266">
+        <dc:Bounds x="680" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1goqhbe_di" bpmnElement="Activity_1goqhbe">
+        <dc:Bounds x="860" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10d9y6w_di" bpmnElement="Event_10d9y6w">
+        <dc:Bounds x="1022" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1000" y="145" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0mav4t6_di" bpmnElement="Flow_0mav4t6">
+        <di:waypoint x="208" y="120" />
+        <di:waypoint x="320" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kyaxph_di" bpmnElement="Flow_1kyaxph">
+        <di:waypoint x="420" y="120" />
+        <di:waypoint x="490" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pmzppu_di" bpmnElement="Flow_0pmzppu">
+        <di:waypoint x="590" y="120" />
+        <di:waypoint x="680" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jrw6yn_di" bpmnElement="Flow_0jrw6yn">
+        <di:waypoint x="780" y="120" />
+        <di:waypoint x="860" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ha0rqe_di" bpmnElement="Flow_1ha0rqe">
+        <di:waypoint x="960" y="120" />
+        <di:waypoint x="1022" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
